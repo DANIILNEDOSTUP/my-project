@@ -27,7 +27,16 @@ jobs:
 
     - name: Build with Gradle
       run: ./gradlew build
-
+    
+    - name: Check current directory
+      run : ll
+    
+    - name: Build Docker image
+      run : docker build -t java-app .
+    
+    - name: Check image
+      run : docker images
+ 
     #- name: Build and Push Docker Image
     #  uses: mr-smithers-excellent/docker-build-push@v4
     #  with:
