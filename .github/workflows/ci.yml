@@ -28,15 +28,25 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     
-    - name: Check current directory
-      run : ls -la
+   # - name: Check current directory
+   #   run : ls -la
     
-    - name: Build Docker image
-      run : docker build -t java-app .
+   # - name: Build Docker image
+   #   run : docker build -t java-app .
     
-    - name: Check image
-      run : docker images
- 
+   # - name: Check image
+   #   run : docker images
+    
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+        image: daniilnedostup/java-app
+        registry: docker.io
+        username: daniilnedostup
+        password: 23mtk456
+      
+      
+      
     #- name: Build and Push Docker Image
     #  uses: mr-smithers-excellent/docker-build-push@v4
     #  with:
