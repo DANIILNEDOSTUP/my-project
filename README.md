@@ -1,3 +1,6 @@
+##### status of last deploy
+    <img src="https://github.com/DANIILNEDOSTUP/my-project/workflows/Java-CI-with-Gradle/badge.svg?branch=master"><br>
+
 ##### build the project
 
     ./gradlew build
