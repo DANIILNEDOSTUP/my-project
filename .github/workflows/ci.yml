@@ -29,7 +29,7 @@ jobs:
       run: ./gradlew build
     
     - name: Build Docker image
-      run : docker build -t java-app . 
+      run : docker build -t java-app:latest . 
     
     - name: Push in DockerHub
       run : |
