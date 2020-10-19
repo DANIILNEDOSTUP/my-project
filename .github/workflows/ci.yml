@@ -37,9 +37,9 @@ jobs:
     - name: Push in DockerHub
       run : |
             docker login -u ${{ secrets.DOCKERHUB_LOGIN }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-            docker tag daniilnedostup/java-app daniilnedostup/java-app:${{ github.sha }}
-            docker push daniilnedostup/java-app
-            docker push daniilnedostup/java-app:${{ github.sha }}
+            docker tag java-app java-app:${{ github.sha }}
+            docker push java-app:${{ github.sha }}
+            docker push java-app
   
   ci-process:
     
