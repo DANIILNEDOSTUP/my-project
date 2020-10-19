@@ -45,8 +45,7 @@ jobs:
         aws-region: eu-central-1
     
     - name: Creating elasticbeanstalk
-      run : aws elasticbeanstalk create-application --application-name java-app \
-            --region eu-central-1
+      run : aws elasticbeanstalk create-application --application-name java-app
     
     - name: Creating environment
       run : aws elasticbeanstalk create-environment --application-name java-app \
