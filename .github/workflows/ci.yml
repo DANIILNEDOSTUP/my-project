@@ -39,6 +39,22 @@ jobs:
             docker login -u ${{ secrets.DOCKERHUB_LOGIN }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
             docker tag java-app daniilnedostup/java-app:${{ github.sha }}
             docker push daniilnedostup/java-app:${{ github.sha }}
+     
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+    
+    - name: Deploy
+      run : |
+            zip -r deployment-${{ github.sha }}.zip .
+            aws s3 cp deployment-${{ github.sha }}.zip s3://java-app-github-actions
+            aws elasticbeanstalk create-application-version --application-name app-java \
+                --version-label ${{ github.sha }} --source-bundle S3Bucket="java-app-github-actions",S3Key="deployment-${{ github.sha }}.zip"
+            aws elasticbeanstalk update-environment --application-name app-java \
+                --environment-name staging --version-label ${{ github.sha }}
   
   ci-process:
     
@@ -49,12 +65,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-central-1
+
     
     
     
