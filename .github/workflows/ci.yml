@@ -28,6 +28,16 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     
+    - name: Build Docker image
+      run : docker build -t java-app . 
+    
+    - name: Push in DockerHub
+      run : |
+            docker login -u$DOCKERHUB_LOGIN -p$DOCKERHUB_PASSWORD
+            docker tag daniilnedostup/java-app:latest daniilnedostup/java-app:${{ github.sha }}
+            docker push daniilnedostup/java-app:latest
+            docker push daniilnedostup/java-app:${{ github.sha }}
+  
   ci-process:
     
     runs-on: ubuntu-latest
@@ -44,15 +54,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-central-1
     
-    - name: Build Docker image
-      run : docker build -t java-app . 
-    
-    - name: Push in DockerHub
-      run : |
-            docker login -u$DOCKERHUB_LOGIN -p$DOCKERHUB_PASSWORD
-            docker tag daniilnedostup/java-app:latest daniilnedostup/java-app:${{ github.sha }}
-            docker push daniilnedostup/java-app:latest
-            docker push daniilnedostup/java-app:${{ github.sha }}
     
     
     #- name: Creating elasticbeanstalk
