@@ -44,8 +44,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-central-1
     
-    - name: Creating elasticbeanstalk
-      run : aws elasticbeanstalk create-application --application-name app-java
+    #- name: Creating elasticbeanstalk
+    #  run : aws elasticbeanstalk create-application --application-name app-java
     
     - name: Creating environment
       run : aws elasticbeanstalk create-environment --application-name app-java \
