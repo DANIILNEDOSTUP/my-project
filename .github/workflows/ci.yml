@@ -29,13 +29,16 @@ jobs:
       run: ./gradlew build
     
     - name: Build Docker image
-      run : docker build -t java-app:latest . 
+      run : docker build -t java-app . 
+    
+    - name: Check image
+      run : docker images
     
     - name: Push in DockerHub
       run : |
             docker login -u ${{ secrets.DOCKERHUB_LOGIN }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-            docker tag daniilnedostup/java-app:latest daniilnedostup/java-app:${{ github.sha }}
-            docker push daniilnedostup/java-app:latest
+            docker tag daniilnedostup/java-app daniilnedostup/java-app:${{ github.sha }}
+            docker push daniilnedostup/java-app
             docker push daniilnedostup/java-app:${{ github.sha }}
   
   ci-process:
