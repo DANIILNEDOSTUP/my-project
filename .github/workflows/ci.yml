@@ -33,7 +33,7 @@ jobs:
     
     - name: Push in DockerHub
       run : |
-            docker login -u$DOCKERHUB_LOGIN -p$DOCKERHUB_PASSWORD
+            docker login -u ${{ secrets.DOCKERHUB_LOGIN }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
             docker tag daniilnedostup/java-app:latest daniilnedostup/java-app:${{ github.sha }}
             docker push daniilnedostup/java-app:latest
             docker push daniilnedostup/java-app:${{ github.sha }}
