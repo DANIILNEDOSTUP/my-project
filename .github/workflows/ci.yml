@@ -37,8 +37,7 @@ jobs:
     - name: Push in DockerHub
       run : |
             docker login -u ${{ secrets.DOCKERHUB_LOGIN }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-            docker tag java-app daniilnedostup/java-app:${{ github.sha }}
-            docker push daniilnedostup/java-app:${{ github.sha }}
+            docker tag java-app daniilnedostup/java-app:latest
             docker push daniilnedostup/java-app:latest
      
     - name: Configure AWS credentials
