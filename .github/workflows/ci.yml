@@ -109,9 +109,8 @@ jobs:
   #    with:
   #      image: daniilnedostup/java-app
   #      registry: docker.io
-  #      username: daniilnedostup
-  #      password: 23mtk456
-      
+  #      username: daniilnedo*
+  #      password: 23mt***
       
     #- name: Build and Push Docker Image
     #  uses: mr-smithers-excellent/docker-build-push@v4
