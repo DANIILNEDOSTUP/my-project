@@ -49,7 +49,7 @@ jobs:
     
     - name: Deploy
       run : |
-            zip -r deployment-${{ github.sha }}.zip .
+            zip -r deployment-${{ github.sha }}.zip Dockerrun.aws.json
             aws s3 cp deployment-${{ github.sha }}.zip s3://java-app-github-actions
             aws elasticbeanstalk create-application-version --application-name app-java \
                 --version-label ${{ github.sha }} --source-bundle S3Bucket="java-app-github-actions",S3Key="deployment-${{ github.sha }}.zip"
