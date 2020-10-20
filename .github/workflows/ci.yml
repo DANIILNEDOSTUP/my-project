@@ -49,12 +49,22 @@ jobs:
     
     - name: Deploy
       run : |
-            zip -r deployment-${{ github.sha }}.zip Dockerrun.aws.json
-            aws s3 cp deployment-${{ github.sha }}.zip s3://java-app-github-actions
+            zip -r deployment.zip Dockerrun.aws.json
+            aws s3 cp deployment.zip s3://java-app-github-actions
             aws elasticbeanstalk create-application-version --application-name app-java \
-                --version-label ${{ github.sha }} --source-bundle S3Bucket="java-app-github-actions",S3Key="deployment-${{ github.sha }}.zip"
+                --version-label ${{ github.sha }} --source-bundle S3Bucket="java-app-github-actions",S3Key="deployment.zip"
             aws elasticbeanstalk update-environment --application-name app-java \
                 --environment-name staging --version-label ${{ github.sha }}
+    
+    
+     #- name: Deploy
+     # run : |
+     #       zip -r deployment-${{ github.sha }}.zip Dockerrun.aws.json
+     #       aws s3 cp deployment-${{ github.sha }}.zip s3://java-app-github-actions
+     #       aws elasticbeanstalk create-application-version --application-name app-java \
+     #           --version-label ${{ github.sha }} --source-bundle S3Bucket="java-app-github-actions",S3Key="deployment-${{ github.sha }}.zip"
+     #       aws elasticbeanstalk update-environment --application-name app-java \
+     #           --environment-name staging --version-label ${{ github.sha }}
   
   ci-process:
     
